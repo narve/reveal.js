@@ -1,64 +1,95 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 
-		<title>narve's reveal.js</title>
+    <title>narve's reveal.js</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <link href="dist/reset.css" rel="stylesheet">
+    <link href="dist/reveal.css" rel="stylesheet">
+    <link href="dist/theme/black.css" rel="stylesheet">
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+    <!-- Theme used for syntax highlighted code -->
+    <link href="plugin/highlight/monokai.css" rel="stylesheet">
 
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section id="markdown-section"
-						data-markdown-xxx="examples/markdown.md"
-						data-markdown-xx="https://raw.githubusercontent.com/narve/presentations/master/dotnet8/index.md?token=GHSAT0AAAAAACVYQSZNLW74CCJLF7I6JHGAZWF3T5A"
-						data-markdown="placeholder.md"
-						data-separator="^\n\n\n"
-						data-separator-vertical="^\n\n"
-						data-separator-notes="^Note:"
-						data-charset="iso-8859-15"
-				>
-				<!--
-                      Note that Windows uses `\r\n` instead of `\n` as its linefeed character.
-                      For a regex that supports all operating systems, use `\r?\n` instead of `\n`.
-                  -->
-				</section>
-			</div>
-		</div>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+        <h1>narve's reveal.js</h1>
+        <p>
+            This is Narve's Github-hosted version of Reveal.js (https://revealjs.com).
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
+            To use it, append the path to the file you want to view to the URL.
+            For example, to view the README.md file, go to:
+            <br>
+
+            <a href="https://narve.github.io/reveal.js?ref=README.md">https://narve.github.io/reveal.js?ref=README.md</a>
+        </p>
+        <p>See form on next page</p>
+        </section>
+        <section>
+        <form action="/" method="get">
+            <label>
+                <input name="ref" placeholder="Path to file" type="text" value="examples/markdown.md">
+            </label>
+            <input type="submit" value="GO">
+        </form>
+        See some tips on next page
+        </section>
+        <section>
+        <h2>Some tips</h2>
+        <p>Math: x = (-b +- sqrt(b^2-4ac))/(2a)  becomes</p>
+        <p>$$ x = (-b +- sqrt(b^2-4ac))/(2a) $$</p>
+        <p>$ sum_(i=1)^n i^3=((n(n+1))/2)^2 $</p>
+        </section>
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/math/math.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
 
 
-			const params = new URLSearchParams(document.location.search)
-			const ref = params.get('ref')
-			console.log({ref})
-			if (ref) {
-				const element = document.getElementById('markdown-section')
-				element.setAttribute('data-markdown', ref)
-			}
+    const params = new URLSearchParams(document.location.search)
+    const ref = params.get('ref')
+    console.log({ref})
+    if (ref) {
+
+        const html = `
+<section id="markdown-section"
+        data-markdown="${ref}"
+        data-separator="^\\n\\n\\n"
+        data-separator-vertical="^\\n\\n"
+        data-separator-notes="^Note:"
+        data-charset="iso-8859-15"
+>
+<!--
+      Note that Windows uses \`\\r\\n\` instead of \`\\n\` as its linefeed character.
+      For a regex that supports all operating systems, use \`\\r?\\n\` instead of \`\\n\`.
+  -->
+</section>
+`;
 
 
-			// More info about initialization & config:
-		// - https://revealjs.com/initialization/
-		// - https://revealjs.com/config/
-		Reveal.initialize({
-		hash: true,
+        const element = document.querySelector('.reveal .slides')
+        element.innerHTML = html
+    }
 
-		// Learn about plugins: https://revealjs.com/plugins/
-		plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-		});
-		</script>
-	</body>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.MathJax2]
+    });
+</script>
+</body>
 </html>
